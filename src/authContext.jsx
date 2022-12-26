@@ -53,15 +53,15 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
-    // if(!state.role) return;
-    // const fetchData = async () => {
-    //   const res = await sdk.check({role:state.role});
-    //   if(res.error){
-    //     window.location.href = "/" + state.role + "/login";
-    //       dispatch({type: "LOGOUT"});
-    //   }
-    // }
-    // fetchData()
+    if(!state.role) return;
+    const fetchData = async () => {
+      const res = await sdk.check({role:state.role});
+      if(res.error){
+        window.location.href = "/" + state.role + "/login";
+          dispatch({type: "LOGOUT"});
+      }
+    }
+  fetchData()
   }, [state.role]);
 
   return (
