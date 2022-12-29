@@ -46,7 +46,7 @@ const AdminLoginPage = () => {
 	};
 
 	return (
-		<div className="w-full max-w-xs mx-auto">
+		<div className="w-full max-w-xs mx-auto pt-10">
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8 ">
@@ -60,7 +60,7 @@ const AdminLoginPage = () => {
 						type="email"
 						placeholder="Email"
 						{...register('email')}
-						className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+						className={`"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
 							errors.email?.message ? 'border-red-500' : ''
 						}`}
 					/>

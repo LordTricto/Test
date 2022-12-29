@@ -15,12 +15,20 @@ function renderRoutes(role) {
 					<Route
 						path="/admin/dashboard"
 						element={<AdminDashboardPage />}></Route>
+					<Route
+						exact
+						path="/admin/login"
+						element={<AdminLoginPage />}></Route>
 				</Routes>
 			);
 			break;
 		default:
 			return (
 				<Routes>
+					<Route
+						path="/admin/dashboard"
+						element={<Navigate to="/admin/login" replace />}
+					/>
 					<Route
 						exact
 						path="/admin/login"
@@ -37,20 +45,21 @@ function Main() {
 
 	return (
 		<div className="h-full">
-			<div className="flex w-full">
-				<div className="w-full">
+			<div className="flex flex-grow w-full h-full">
+				<div className="flex flex-grow w-full h-full">
 					<div
 						className={
-							'page-wrapper w-full py-10 px-5' +
+							'flex flex-grow w-full h-full min-h-screen px-5 overflow-y-auto' +
 							` ${
 								state.isAuthenticated && state.role === 'admin'
 									? 'bg-black-bg '
 									: ''
 							}`
 						}>
-						{!state.isAuthenticated
-							? renderRoutes('none')
-							: renderRoutes(state.role)}
+						{/* {!state.isAuthenticated
+              ? renderRoutes("none")
+              : renderRoutes(state.role)} */}
+						{renderRoutes(state.role)}
 					</div>
 				</div>
 			</div>

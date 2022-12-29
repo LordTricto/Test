@@ -39,6 +39,32 @@ export default function MkdSDK() {
 		return jsonGet;
 	};
 
+	this.login = async function (email, password, role) {
+		//TODO
+		const header = {
+			'Content-Type': 'application/json',
+			'x-project': base64Encode,
+			// Authorization: "Bearer " + localStorage.getItem("token"),
+		};
+		const getResult = await fetch(this._baseurl + `/v2/api/lambda/login`, {
+			method: 'post',
+			headers: header,
+			body: JSON.stringify({
+				email,
+				password,
+				role,
+			}),
+		});
+		const jsonGet = await getResult.json();
+		if (getResult.status === 401) {
+			throw new Error(jsonGet.message);
+		}
+		if (getResult.status === 403) {
+			throw new Error(jsonGet.message);
+		}
+		return jsonGet;
+	};
+
 	this.getHeader = function () {
 		return {
 			Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -94,6 +120,34 @@ export default function MkdSDK() {
 					}
 				);
 				const jsonPaginate = await paginateResult.json();
+				this.check = async function (role) {
+					//TODO
+					const header = {
+						'Content-Type': 'application/json',
+						'x-project': base64Encode,
+						Authorization:
+							'Bearer ' + localStorage.getItem('token'),
+					};
+					const getResult = await fetch(
+						this._baseurl + `/v2/api/lambda/check`,
+						{
+							method: 'post',
+							headers: header,
+							body: JSON.stringify({
+								role,
+							}),
+						}
+					);
+					const jsonGet = await getResult.json();
+					// console.log(jsonGet, getResult)
+					// if (getResult.status === 401) {
+					//   throw new Error(jsonGet.message);
+					// }
+					// if (getResult.status === 403) {
+					//   throw new Error(jsonGet.message);
+					// }
+					return jsonGet;
+				};
 
 				if (paginateResult.status === 401) {
 					throw new Error(jsonPaginate.message);
