@@ -42,7 +42,7 @@ function Main() {
     <div className="h-full">
       <div className="flex flex-grow w-full h-full">
         <div className="flex flex-grow w-full h-full">
-          <div className={"flex flex-grow w-full h-full min-h-screen py-10 px-5 overflow-y-auto" + ` ${(state.isAuthenticated  && state.role === "admin") ? "bg-black-bg " : ""}`}>
+          <div className={"flex flex-grow w-full h-full min-h-screen px-5 overflow-y-auto" + ` ${(state.isAuthenticated  && state.role === "admin") ? "bg-black-bg " : ""}`}>
             {/* {!state.isAuthenticated
               ? renderRoutes("none")
               : renderRoutes(state.role)} */}

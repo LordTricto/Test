@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+import { GlobalContext, showToast } from "../globalContext";
+
 import { AuthContext } from "../authContext";
 import MkdSDK from "../utils/MkdSDK";
 import React from "react";
@@ -16,6 +18,8 @@ const AdminLoginPage = () => {
     .required();
 
   const { dispatch } = React.useContext(AuthContext);
+  const { dispatch: globalDispatch } = React.useContext(GlobalContext);
+
   const navigate = useNavigate();
   const {
     register,
@@ -29,10 +33,20 @@ const AdminLoginPage = () => {
   const onSubmit = async (data) => {
     let sdk = new MkdSDK();
     //TODO
+    const res = await sdk.login(data.email, data.password, "admin");
+    localStorage.setItem("role", res.role)
+    localStorage.setItem("token", res.token)
+
+    dispatch({
+      type: "LOGIN",
+      payload: res
+    });
+    showToast(globalDispatch, "Successfully logged in")
+    navigate("/admin/dashboard")
   };
 
   return (
-    <div className="w-full max-w-xs mx-auto">
+    <div className="w-full max-w-xs mx-auto pt-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8 "
